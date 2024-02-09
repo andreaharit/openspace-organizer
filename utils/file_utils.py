@@ -2,7 +2,18 @@ import sys
 import json
 
 
-def load_json(file):
+def load_json(file: str):
+    """
+    Loads json with settings into variables.
+
+    Args:
+        file (str): json file to be loaded.
+
+    Returns:
+        num_t (int): number of tables.
+        num_s (int): number of seats.
+        source_file (str): file with people's name.
+    """
     f = open('utils/setting_op.json')
     data = json.load(f)
     num_t = data["num_tables"]
@@ -39,27 +50,26 @@ def get_people(source_file: str = "new_colleagues.csv") -> list:
         sys.exit()
     return people
 
-def check_numb_table_seat(number) -> int:
+def check_numb_table_seat(number: int) -> bool:
     """
     Function gets number of tables or number of seats per table.
     It checks if its an acceptable value otherwise it closes the program.
 
     Args:
-        num_tables (int): number of tables in the OpenSpace.
-        num_seats (int): number of seats in each table.
+        num (int): number to be checked.
 
     Raises:
         ValueError: In case tables or seat numbers provided are 0 or negative.
         TypeError: In case tables or seat numbers provided are not a number.
 
     Returns:
-        num_t (int): number of tables.
-        num_s (int): number of seats.
+        True : if num is in acceptable format.
 
     """
     try:    
+        # checks if it's an int
         if isinstance(number, int):
-            # Checks if at least one table and one chair exists
+            # Checks if at least one table/one chair exists
             if number > 0:  
                 return True
             else:
@@ -74,7 +84,12 @@ def check_numb_table_seat(number) -> int:
         print("Please check if number of tables or seats is bigger than 0.")
         sys.exit()
         
-def ask_display():
+def ask_display() -> bool: 
+    """
+    Function asks user if they want to display on terminal seat arrangements.
+    Returns:
+        bool: True if user wants to see, False if not.
+    """
     while True:
             answer = str(input("Do you wish us to display who is seating where? Type y for yes: ")).lower().strip()
             if answer == "y":

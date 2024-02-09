@@ -30,11 +30,13 @@ def main():
 
     # Populates the seats with people
     print ("Assigning people to seats...")
-    room.organize(people)    
-    # Writes CSV with final layout
+    room.organize(people) 
+
+    # Writes excel with final layout
     print ("Outputting table and seating distribution on file.")
     room.store()
-    # Displays who is where seating
+
+    # Displays who is sitting where if user wants
     if ask_display():
         room.display()     
     
