@@ -20,7 +20,7 @@ class Seat:
         """
         Method assigns a name to a seat and changes it to occupied.
         Args:
-            name (str): name of a person who is seating.
+            name (str): name of a person who is sitting.
         """        
         self.occupant = name
         self.free = False        
@@ -82,7 +82,7 @@ class Table(Seat):
         """
         Method counts the number of free seats in a table.
         Returns:
-            count (int): seats available for seating.
+            count (int): seats available for sitting.
         """
         count = 0             
         if self.has_free_spot():
