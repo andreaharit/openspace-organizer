@@ -18,7 +18,7 @@ As a default feature, the program makes sure no one is sitting alone.
 Besides native Python libraries (csv, sys, random, json), the program uses Pandas.
 To use it:
 1. Clone the repository.
-2. Add a CSV file with the names of the people to be seated in the same folder as main.
+2. Add a CSV file with the names of the people to be sitted in the same folder as main.
 3. If necessary:
 ```sh
    pip install pandas
