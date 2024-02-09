@@ -2,8 +2,8 @@ class Seat:
     """    
     Class creates seat object that contain attributes:
     Atrib:
-    :self.occupant (str): Stores a name () of someone sitting or "NULL" if the seat is empty.
-    :self.free (bool):  True if no one is sitting in the object, False if the seat is free.      
+    self.occupant (str): Stores a name () of someone sitting or "NULL" if the seat is empty.
+    self.free (bool):  True if no one is sitting in the object, False if the seat is free.      
     """
    
     def __init__(self, free: bool = True) -> None:   
@@ -20,7 +20,7 @@ class Seat:
         """
         Method assigns a name to a seat and changes it to occupied.
         Args:
-            :name (str): name of a person who is seating.
+            name (str): name of a person who is seating.
         """        
         self.occupant = name
         self.free = False        
@@ -29,7 +29,7 @@ class Seat:
         """
         Method removes person from a seat. Seats it as a free seat and with "NULL" ocuppant.
         Returns:
-            :previous_occupant (str): name of the person who was removed from the seat.
+            previous_occupant (str): name of the person who was removed from the seat.
         """      
         self.free = True   
         previous_occupant = self.occupant  
@@ -40,9 +40,9 @@ class Table(Seat):
     """    
     Class creates table object that contain attributes:
     Atrib:
-    :self.table_num (str): Numerical name for a table, starting from 1.
-    :self.capacity (int):  Number of seats available in the table.
-    :self.seats (list): Stores all seats objects available at the table.      
+    self.table_num (str): Numerical name for a table, starting from 1.
+    self.capacity (int):  Number of seats available in the table.
+    self.seats (list): Stores all seats objects available at the table.      
       
     """
     def __init__(self, table_num: str, capacity: int) -> None:
@@ -71,7 +71,7 @@ class Table(Seat):
         """
         Method searches table for an available seat. If it finds one, seats this person on it.
         Args:
-            :name (str): name of a person who is trying to seat        
+            name (str): name of a person who is trying to seat        
         """        
         for s in self.seats:
             if s.free:
@@ -84,7 +84,7 @@ class Table(Seat):
         Returns:
             count (int): seats available for seating.
         """
-        count = 0
+        count = 0             
         if self.has_free_spot():
             for s in self.seats:
                 if s.free:

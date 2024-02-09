@@ -1,5 +1,73 @@
+import sys
 from utils.openspace import Openspace
+from utils.file_utils import source_file, num_tables, num_seats
 
+def get_people() -> list: 
+    """
+    Function gets a filename type CSV from file_utils, reads it and loads the names in the file into a list.
+    Raises:
+        FileNotFoundError: In case the file is not readable, not a CSV, or typed wrong in the file_utils.
+        Closes the program if Error is raised.
+    Returns:
+        people (list): list where each element was a name in the source file provided in file_utils.
+    """    
+    try:
+        source = source_file
+        # Checks if it's a csv
+        if not source.endswith("csv"):
+            raise FileNotFoundError
+        else:
+            # Initializes list to store names    
+            people = []
+            # Reads CSV files with names and assign to list
+            with open(source, "r") as f:
+                for line in f:
+                    line = line.strip()
+                    people.append(line)
+            f.close()            
+    except FileNotFoundError:
+        print("Error in loading the file. Please check its name in file_utils.")
+        sys.exit()
+    return people
+
+def get_numb_table_seat(num_tables: int, num_seats: int) -> int:
+    """
+    Function gets number of tables and number of seats per table from file_utils.
+    It checks if its an acceptable value otherwise it closes the program.
+
+    Args:
+        num_tables (int): number of tables in the OpenSpace.
+        num_seats (int): number of seats in each table.
+
+    Raises:
+        ValueError: In case tables or seat numbers provided are 0 or negative.
+        TypeError: In case tables or seat numbers provided are not a number.
+
+    Returns:
+        num_t (int): number of tables.
+        num_s (int): number of seats.
+
+    """
+    while True:
+        try:
+            # Checks if value is a number
+            if isinstance(num_tables, int) and isinstance(num_seats, int):
+                # Checks if at least one table and one chair exists
+                if num_tables > 0 and num_seats > 0:       
+                    num_t = num_tables
+                    num_s = num_seats
+                    return num_t, num_s
+                else:
+                    raise ValueError
+            else: 
+                raise TypeError
+        # Exits programs in case values are not up to specification
+        except TypeError:
+            print("Please check if number of tables or seats is an integer at file_utils.")
+            sys.exit()
+        except ValueError:
+            print("Please check if number of tables or seats is bigger than 0.")
+            sys.exit()
 
 def main():
     """
@@ -14,56 +82,17 @@ def main():
 
     """
 
-
-
-    # Default parameters
-    num_t = 6
-    num_s = 4
-    print("Welcome to OpenSpace. Let's start!")
-    while True:
-        try:
-            source = input('Please insert file to be read: ').lower().strip()
-            if not source.endswith("csv"):
-                raise FileNotFoundError
-            else:
-                # Initializing list to store names    
-                people = []
-                # Reads CSV files with names and assign to list
-                with open(source, "r") as f:
-                    for line in f:
-                        line = line.strip()
-                        people.append(line)
-                f.close()
-                break
-        except FileNotFoundError:
-            print("Error in loading the file.")
-
-            
-    print("Currently layout is 6 tables with 4 seats each.")
-
-    # Asks user if they wish to change default settings   
-    while True:
-        try: 
-            print ("Do you wish to change the layout?")
-            answer = input("Please use 1 for Yes or anything else of No: ")
-            answer.strip().lower()
-            if answer == "1":
-                while True:
-                    num_t = int(input("Insert number of tables: "))
-                    num_s = int(input("Insert number of seats per table: "))
-                    break
-            break
-        except ValueError:
-            print ("Input not supported, please try again")
-            pass
-    
+    print("Welcome to OpenSpace. Let's start!") 
+    people = get_people()
+    n_table, n_seat = get_numb_table_seat(num_tables, num_seats)
     
     # Creates an Openspace
-    room = Openspace(number_of_tables = num_t, capacity_tables = num_s)
+    room = Openspace(number_of_tables = n_table, capacity_tables = n_seat)
+
     # Populates the seats with people
     print ("Assigning people to seats...")
     room.organize(people)
-    # Display current occupation
+    # Displays current occupation
     print ("Current OpenSpace occupation: ", end="")
     room.display_occupation()
     # Writes CSV with final layout

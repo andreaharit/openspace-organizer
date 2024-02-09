@@ -7,17 +7,17 @@ class Openspace(Table):
 
     Args:
         Table (class): Generates tables in a room.
-        :number_of_tables (int): number of tables available in the Openspace. Default is 6.
-        :capacity_tables (int): number of seats available in each table. Default is 4.
+        number_of_tables (int): number of tables available in the Openspace. Default is 6.
+        capacity_tables (int): number of seats available in each table. Default is 4.
     Atr:
-        :self.number_of tables (int): assigned to argument number_of_tables. 
-        :self.capacity_tables (int): assigned to argument capacity_tables.
+        self.number_of tables (int): assigned to argument number_of_tables. 
+        self.capacity_tables (int): assigned to argument capacity_tables.
         self.tables (list): stores tables objects of the OpenSpace.
         """
     def __init__(self, number_of_tables: int, capacity_tables: int) -> None:
         self.number_of_tables = number_of_tables
         self.capacity_tables = capacity_tables
-        # Create list of tables 
+        # Creates list of tables 
         self.tables = [Table(table_num = str(_+1), capacity = self.capacity_tables) for _ in range(self.number_of_tables)]        
           
     def organize(self, names: list) -> None: 
@@ -26,17 +26,17 @@ class Openspace(Table):
         seating alone in the last table. If it person is alone, removes a person from the first table, first seat
         and puts them in the last table too.
         Args:
-            :names (list): list of people's names that will be seated.        
+            names (list): list of people's names that will be seated.        
         """       
-        # Randomizing order of names 
+        # Randomizes order of names 
         random.shuffle(names)
-        # Assigning names to tables and its seats
+        # Assigns names to tables and its seats
         for name in names:  
             for table in self.tables:
                 if table.has_free_spot():
                     table.assign_seat(name)
                     break
-        # Checking if there is a person alone at the last table. If yes, reassign someone to be together.    
+        # Checks if there is a person alone at the last table. If yes, reassigns someone to be together.    
         self.not_seat_alone()
 
     def room_layout (self) -> list:
@@ -50,12 +50,12 @@ class Openspace(Table):
         layout = []        
         for table in self.tables:
             for seat in table.seats:
-                # initialize/reset temporary sublist for each pair table/name
+                # Initializes/resets temporary sublist for each pair table/name
                 location_person = []
-                # populates sublist with info
+                # Populates sublist with info
                 location_person.append(table.table_num)
                 location_person.append(seat.occupant)
-                # puts into main list of the OpenSpace layout
+                # Puts into main list of the OpenSpace layout
                 layout.append(location_person)
         return layout
     
@@ -106,7 +106,7 @@ class Openspace(Table):
         """
         # Creates header      
         header = ["Table", "Occupant"]
-        # Writing file
+        # Writes file with final layout
         with open(filename ,'w') as output:
             writer = csv.writer(output)
             writer.writerow(header)

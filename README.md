@@ -3,7 +3,12 @@
 ## Description
 OpenOrganizer is python program that randomly assigns people to seats on tables.
 
-By importing a user provided CSV file with people's names, then asking user for number of tables and seats. And finally exports the distribuition via a CSV file where:
+The program reads user provided settings from an file_utils. Where:
+* source_file is the name of the csv file with people's name
+* num_tables is the number of tables available at the OpenSpace.
+* num seats is the number of seats that each table has.
+
+And exports the distribuition via a CSV file where:
 
 * Column 1 = Table number.
 * Column 2 = Name of a person seating at that table.
@@ -15,13 +20,11 @@ The program uses default python libraries.
 To use it:
 1. Clone the repository.
 2. Add a CSV file with the names of the people to be seated in the same folder as main.
-3. Run the program from the terminal.
 
 ## Usage
-The program asks the following inputs from the user:
-* Name of file to be read (Ex: "new_colleagues.csv").
-* If the user wishes to change default number of tables and seats. If yes:
-   * It asks for a number of tables.
-   * It asks for the number of seats per table.
-   
-The program then assigns people to a table, displays the current occupancy and exports the layout to a new file: seat_layout.csv on the main folder.
+1. User might edit file_utils to provide the parameters for:
+   1. Name of the CSV file to be read, with people's name, that was put on main.
+   2. Number of available tables.
+   3. Number of available seats per table.
+2. Run program via terminal. Where the program will greet you, assign people to a table and displays the current occupancy.
+3. The program will then output the layout to a new file: seat_layout.csv on the main folder.
