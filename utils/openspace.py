@@ -1,6 +1,7 @@
 from .table import Table
 import random
 import csv
+import pandas as pd
 
 class Openspace(Table):
     """_summary_
@@ -100,15 +101,10 @@ class Openspace(Table):
             person_moved = first_table.seats[0].remove_occupant()
             last_table.assign_seat(person_moved)
 
-    def store (self, filename = "seat_layout.csv") -> None:  
+    def store (self, filename = "seat_layout.xlsx") -> None:  
         """
         Method stores currently seatting layout into a CSV file.        
-        """
-        # Creates header      
-        header = ["Table", "Occupant"]
-        # Writes file with final layout
-        with open(filename ,'w') as output:
-            writer = csv.writer(output)
-            writer.writerow(header)
-            writer.writerows(self.room_layout())
-        output.close()
+        """        
+        df = pd.DataFrame(self.room_layout(), columns = ['Table', 'Occupant'])
+        df.to_excel(filename, index=False)
+
