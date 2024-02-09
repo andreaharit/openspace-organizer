@@ -91,13 +91,23 @@ def main():
 
     # Populates the seats with people
     print ("Assigning people to seats...")
-    room.organize(people)
-    # Displays current occupation
-    print ("Current OpenSpace occupation: ", end="")
-    room.display_occupation()
+    room.organize(people)    
     # Writes CSV with final layout
     print ("Outputting table and seating distribution on file.")
     room.store()
+    # Displays who is where seating
+    while True:
+        answer = str(input("Do you wish us to display who is seating where? Type 1 for yes: ")).lower().strip()
+        if answer == "1":
+            room.display()
+            break
+        else:
+            break
+    print ("Done =) Please check out the exported file.")
+     
+            
+    
+
 
 if __name__ == "__main__":
     main()
