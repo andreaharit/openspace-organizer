@@ -5,7 +5,7 @@ from utils.file_utils import load_json, get_people, check_numb_table_seat, ask_d
 def main():
     """
     Main function. 
-    Opens a CSV with the names of people to be seated.
+    Opens a CSV with the names of people to be sitted.
     Asks if whishes to change defatult number of tables and seats.
     Assigns randomly people to seats while not lefting someone alone at the table.
     Displays current occupation (how many seats are still available or full ocuppancy).
@@ -33,7 +33,7 @@ def main():
     room.organize(people) 
 
     # Writes excel with final layout
-    print ("Outputting table and seating distribution on file.")
+    print ("Outputting table and sting distribution on file.")
     room.store()
 
     # Displays who is sitting where if user wants
