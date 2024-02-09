@@ -1,4 +1,4 @@
-from table import Table, Seat
+from .table import Table
 import random
 import csv
 
@@ -100,7 +100,7 @@ class Openspace(Table):
             person_moved = first_table.seats[0].remove_occupant()
             last_table.assign_seat(person_moved)
 
-    def store (self, filename = "seat_layout_copy.csv") -> None:  
+    def store (self, filename = "seat_layout.csv") -> None:  
         """
         Method stores currently seatting layout into a CSV file.        
         """

@@ -1,6 +1,5 @@
 from utils.openspace import Openspace
-import random
-import csv
+
 
 def main():
     """
@@ -14,10 +13,13 @@ def main():
         colum2 = Name person seating at the table.
 
     """
+
     # Initializing list to store names
+    source = "new_colleagues.csv"
+
     people = []
     # Reads CSV files with names and assign to list
-    with open("new_colleagues copy.csv", "r") as f:
+    with open(source, "r") as f:
         for line in f:
             line = line.strip()
             people.append(line)
@@ -26,7 +28,7 @@ def main():
     # Default parameters
     num_t = 6
     num_s = 4
-    
+    print("Welcome to OpenSpace. Let's start!")
     print("Currently layout is 6 tables with 4 seats each.")
 
     # Asks user if they wish to change default settings   
