@@ -14,21 +14,31 @@ def main():
 
     """
 
-    # Initializing list to store names
-    source = "new_colleagues.csv"
 
-    people = []
-    # Reads CSV files with names and assign to list
-    with open(source, "r") as f:
-        for line in f:
-            line = line.strip()
-            people.append(line)
-    f.close()
 
     # Default parameters
     num_t = 6
     num_s = 4
     print("Welcome to OpenSpace. Let's start!")
+    while True:
+        try:
+            source = input('Please insert file to be read: ').lower().strip()
+            if not source.endswith("csv"):
+                raise FileNotFoundError
+            else:
+                # Initializing list to store names    
+                people = []
+                # Reads CSV files with names and assign to list
+                with open(source, "r") as f:
+                    for line in f:
+                        line = line.strip()
+                        people.append(line)
+                f.close()
+                break
+        except FileNotFoundError:
+            print("Error in loading the file.")
+
+            
     print("Currently layout is 6 tables with 4 seats each.")
 
     # Asks user if they wish to change default settings   
